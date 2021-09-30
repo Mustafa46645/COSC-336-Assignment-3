@@ -1,4 +1,5 @@
 package com.cosc.main;
+//import java.util.arrays;
 
 public class Merge
 {
@@ -30,6 +31,32 @@ public class Merge
         // TODO: The recursive sorting of each side
 
         //System.out.println("\nPair Count: " + pairCount);
+    }
+    private static void insertionSortRecursive(int arr[], int n){
+
+        insertionSortRecursive(arr, n-1);
+
+        int last = arr[n-1];
+        int a = n-2;
+
+        while (a >= 0 && arr[a] > last){   
+            arr[a=1] = arr[a];
+            a--;
+
+        if (n <= 1)
+            return;
+        }
+        arr[a+1] = last;
+    }
+    private static void mergeSort(int array[], int start, int end){
+        if (end-start>0) {
+            int mid = (end+start)/2;
+            mergeSort(array, start, mid);
+            mergeSort(array,mid+1,end);
+            merge(array,mid,start,end);
+        }
+        return;
+        
     }
 
     private static int[] split(int[] arr, char side)
