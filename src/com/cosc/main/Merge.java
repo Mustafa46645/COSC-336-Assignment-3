@@ -49,14 +49,50 @@ public class Merge
         arr[a+1] = last;
     }
     private static void mergeSort(int array[], int start, int end){
-        if (end-start>0) {
-            int mid = (end+start)/2;
+        if (start < end) {
+            int mid = start + ((end - start) / 2);
+            pairCount++;
             mergeSort(array, start, mid);
-            mergeSort(array,mid+1,end);
-            merge(array,mid,start,end);
+            mergeSort(array, mid + 1, end);
+            merge(array, start, mid, end);
         }
-        return;
-        
+    }
+    //method to merge the sorted arrays together in order
+    private static void merge(int[] array, int mid, int start, int end){
+        int s1 = mid - start + 1;
+        int s2 = end - mid;
+        int L[] = new int[s1];
+        int R[] = new int[s2];
+        for (int i = 0; i < s1; ++i) {
+            L[i] = array[start + i];
+        }
+        for (int k = 0; k < s2; ++k){
+            R[k] = array[mid + 1 + k];
+        }
+        int i = 0;
+        int k = 0;
+        int x = start;
+        while(i < s1 && k < s2) {
+            if (L[i] <= R[k]){
+                array[x] = L[i];
+                i++;
+            }
+            else {
+                array[x] = R[k];
+                k++;
+            }
+            x++;
+        }
+        while(i < s1){
+            array[x] = L[i];
+            i++;
+            x++;
+        }
+        while(k < s2){
+            array[x] = L[k];
+            k++;
+            x++;
+        }
     }
 
     private static int[] split(int[] arr, char side)
